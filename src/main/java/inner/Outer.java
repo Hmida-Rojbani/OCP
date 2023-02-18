@@ -1,6 +1,7 @@
 package inner;
 
 public class Outer {
+    private interface Wild{}
     private String inst="hi";
     private static String stat ="hello";
     public class Inner{

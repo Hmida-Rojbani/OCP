@@ -39,7 +39,6 @@ public class Test {
 
     public static void main(String[] args) {
         Season s = Season.FALL;
-
         for (Season sai : s.values()) {
 
         }
