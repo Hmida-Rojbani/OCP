@@ -64,7 +64,9 @@ public class FindTheStream {
         System.out.println("\nLes ensembles des livres lus indexés par l'âge du lecteur");
 
         Map<Integer, Set<Book>> booksReadByAge = persons.stream()
-                .collect(Collectors.groupingBy(Person::getAge));
+                .collect(Collectors.groupingBy(Person::getAge,
+                        Collectors.flatMapping(person -> person.getBooks().stream(),
+                        Collectors.toSet())));
 
         System.out.println(toString(booksReadByAge));
 
@@ -72,7 +74,9 @@ public class FindTheStream {
         // 4 - Pour chaque livre, le nombre de personnes l'ayant lu
         System.out.println("\nPour chaque livre, le nombre de personnes l'ayant lu");
 
-        Map<Book, Long> ownerCountByBook = null;
+        Map<Book, Long> ownerCountByBook = persons.stream()
+                .flatMap(person -> person.getBooks().stream())
+                .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
 
         System.out.println(toString(ownerCountByBook));
 
